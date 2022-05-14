@@ -21,7 +21,7 @@ elif [ "$1" = "-d" ]
 then
 	echo -n ARE YOU SURE?\(yEs\):
 	read AYS
-	if [ AYS = "yEs" ]
+	if [ "$AYS" = "yEs" ]
 	then
 		rm irLifeTimeTest.db
 	fi
@@ -63,6 +63,12 @@ then
 	echo cancel!
 	exit 0
 fi
+if [ -z "$OBJ" ]
+	then
+		echo OBJ is null.
+		echo See you!
+		exit 0
+	fi
 SN=0
 while :
 do
@@ -77,6 +83,12 @@ do
 		echo cancel!
 		exit 0
 	fi
+	if [ -z "$SN" ]
+	then
+		echo SN is null.
+		echo Bye Bye!
+		exit 0
+	fi
 	testDate=`date "+%Y-%m-%d"`
 	#echo -n Enter the Value :
 	dialog --title "Sensor Life Time Test" --inputbox "Enter Value" 8 50 2>dialogTemp
@@ -85,6 +97,12 @@ do
 	if [ $result -eq 1 ]
 	then
 		echo cancel!
+		exit 0
+	fi
+	if [ -z "$VALUE" ]
+	then
+		echo VALUE is null.
+		echo SN = $SN will not save.
 		exit 0
 	fi
 	echo "OBJECT: $OBJ\tSN: $SN\tVALUE:$VALUE\tDATE:$testDate"
