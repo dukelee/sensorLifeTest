@@ -1,2 +1,2 @@
 # sensorLifeTest
-# sensorLifeTest
+本程式為公爵貓感應器長期測試數值紀錄用。使用資料庫紀錄，以加速與方便測試者使用。
