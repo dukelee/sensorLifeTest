@@ -1,0 +1,82 @@
+#!/bin/sh
+
+echo Sensor Life Time Test Record Tool. @2022 DUKECAT DESIGN.
+
+if [ "$1" = "-c" ]
+then
+	echo Create database!
+	sqlite3 irLifeTimeTest.db "create table testdata(obj, sn, value, date);"
+	echo Done.
+	exit 0
+elif [ "$1" = "-l" ]
+then
+	if [ -z $2 ]
+	then
+		sqlite3 irLifeTimeTest.db "select * from testdata;"
+	else
+		sqlite3 irLifeTimeTest.db "select * from testdata where obj = \"$2\";"
+	fi
+	exit 0
+elif [ "$1" = "-d" ]
+then
+	echo -n ARE YOU SURE?\(yEs\):
+	read AYS
+	if [ AYS = "yEs" ]
+	then
+		rm irLifeTimeTest.db
+	fi
+	exit 0
+elif [ "$1" = "-h" ]
+then
+	echo This script is for DEVELOPMENT ONLY.
+	echo No Garantee for anything. sqlite3 is requirement.
+	echo $0 [option] [obj]
+	echo -c To Create database.
+	echo -d Delete database
+	echo -l Show all the data or obj data.
+	exit 0
+elif [ -z $1 ]
+then
+	echo Operate in Normal Mode.
+else
+	echo $1 ??, -h for help!
+	exit 0
+	
+fi
+
+if [ -f "irLifeTimeTest.db" ]
+then
+	echo Database is exist.
+else
+	echo Database is not exist, please create first.
+	exit 0
+fi
+
+echo -n Enter Object Name :
+read OBJ
+if [ -z $OBJ ]
+then
+	echo Bye bye..
+	exit 0
+fi
+
+while :
+do
+	echo -n Enter Series Number :
+	read SN
+	if [ -z $SN ]
+	then
+		echo Have a nice day..
+		exit 0
+	fi
+	testDate=`date "+%Y-%m-%d"`
+	echo -n Enter the Value :
+	read VALUE
+	if [ -z $VALUE ]
+	then
+		echo $SN have no value....
+		exit 0
+	fi
+	echo "OBJECT: $OBJ\tSN: $SN\tVALUE:$VALUE\tDATE:$testDate"
+	sqlite3 irLifeTimeTest.db "insert into testdata values(\"$OBJ\", $SN, $VALUE, \"$testDate\");"
+done
