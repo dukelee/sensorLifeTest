@@ -38,13 +38,14 @@ then
 elif [ -z $1 ]
 then
 	echo Operate in Normal Mode.
+	dialog --title "DUKECAT Sensor Life Time Test" --msgbox "It's for dev records, please make sure all data are currect." 0 0
 else
 	echo $1 ??, -h for help!
 	exit 0
 	
 fi
 
-if [ -f "irLifeTimeTest.db" ]
+if [ -f "irLifeTimeTest.db" ] 
 then
 	echo Database is exist.
 else
@@ -54,7 +55,7 @@ fi
 
 #echo -n Enter Object Name :
 #read OBJ
-dialog --title "Sensor Life Time Test" --inputbox "Enter OBJECT NAME" 8 50 2>dialogTemp
+dialog --title "DUKECAT Sensor Life Time Test" --inputbox "Enter OBJECT NAME" 8 50 2>dialogTemp
 result=$?
 OBJ=$(cat dialogTemp)
 
@@ -75,7 +76,7 @@ do
 	#echo -n Enter Series Number :
 	#read SN
 	SN=`expr $SN + 1`
-	dialog --title "Sensor Life Time Test" --inputbox "Enter Serial Number" 8 50 $SN 2>dialogTemp
+	dialog --title "DUKECAT Sensor Life Time Test" --inputbox "Enter Serial Number" 8 50 $SN 2>dialogTemp
 	result=$?
 	SN=$(cat dialogTemp)
 	if [ $result -eq 1 ]
@@ -91,7 +92,7 @@ do
 	fi
 	testDate=`date "+%Y-%m-%d"`
 	#echo -n Enter the Value :
-	dialog --title "Sensor Life Time Test" --inputbox "Enter Value" 8 50 2>dialogTemp
+	dialog --title "DUKECAT Sensor Life Time Test" --inputbox "Enter Value" 8 50 2>dialogTemp
 	result=$?
 	VALUE=$(cat dialogTemp)
 	if [ $result -eq 1 ]
