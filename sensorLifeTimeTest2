@@ -38,7 +38,7 @@ then
 elif [ -z $1 ]
 then
 	echo Operate in Normal Mode.
-	dialog --title "DUKECAT Sensor Life Time Test" --msgbox "It's for dev records, please make sure all data are currect." 0 0
+	dialog --title "DUKECAT Sensor Life Time Test" --msgbox "It's for dev records, please make sure all data are currect.\n-h for help." 0 0
 else
 	echo $1 ??, -h for help!
 	exit 0
