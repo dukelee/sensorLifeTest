@@ -2,6 +2,11 @@
 
 echo Sensor Life Time Test Record Tool. @2022 DUKECAT DESIGN.
 
+if [ ! `which dialog` ]; then
+  echo NO dialog installed!
+  exit 1
+fi
+
 if [ "$1" = "-c" ]
 then
 	echo Create database!
